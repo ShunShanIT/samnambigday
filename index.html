@@ -336,9 +336,9 @@
         cursor: pointer;
         transition: background-color var(--duration-fast) var(--ease-standard);
         display: grid;
-        grid-template-columns: 80px 1fr 200px 120px;
+        grid-template-columns: 80px 1fr 180px 130px;
         gap: var(--space-16);
-        align-items: center;
+        align-items: start;
       }
 
       .task-item:last-child {
@@ -366,6 +366,7 @@
         font-weight: var(--font-weight-bold);
         color: var(--color-text);
         font-family: var(--font-family-base);
+        align-self: center;
       }
 
       .task-content {
@@ -388,6 +389,7 @@
       .task-responsible {
         font-size: var(--font-size-sm);
         color: var(--color-text-secondary);
+        align-self: center;
       }
 
       .task-status {
@@ -398,6 +400,7 @@
         font-size: var(--font-size-sm);
         font-weight: var(--font-weight-medium);
         justify-self: end;
+        align-self: center;
       }
 
       .task-status.not-started {
@@ -421,6 +424,174 @@
       .task-status.completed::before {
         content: '✓ ';
         font-weight: var(--font-weight-bold);
+      }
+
+      .task-reminder {
+        font-size: var(--font-size-sm);
+        color: var(--color-primary);
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+      }
+
+      .reminder-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-4);
+        padding: var(--space-4) var(--space-8);
+        background-color: rgba(var(--color-teal-500-rgb), 0.1);
+        border: 1px solid rgba(var(--color-teal-500-rgb), 0.3);
+        border-radius: var(--radius-sm);
+        font-size: var(--font-size-xs);
+        color: var(--color-primary);
+        cursor: pointer;
+      }
+
+      .reminder-badge:hover {
+        background-color: rgba(var(--color-teal-500-rgb), 0.15);
+      }
+
+      .reminder-icon {
+        font-size: var(--font-size-base);
+      }
+
+      /* Modal Styles */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+      }
+
+      .modal {
+        background-color: var(--color-surface);
+        border-radius: var(--radius-lg);
+        padding: var(--space-24);
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-header {
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-16);
+        color: var(--color-text);
+      }
+
+      .modal-task-info {
+        margin-bottom: var(--space-20);
+        padding: var(--space-12);
+        background-color: var(--color-secondary);
+        border-radius: var(--radius-base);
+      }
+
+      .modal-task-time {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text);
+        margin-bottom: var(--space-4);
+      }
+
+      .modal-task-desc {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+      }
+
+      .reminder-options {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-12);
+        margin-bottom: var(--space-20);
+      }
+
+      .reminder-option {
+        display: flex;
+        align-items: center;
+        gap: var(--space-12);
+        padding: var(--space-12);
+        border: 2px solid var(--color-border);
+        border-radius: var(--radius-base);
+        cursor: pointer;
+        transition: all var(--duration-fast) var(--ease-standard);
+      }
+
+      .reminder-option:hover {
+        border-color: var(--color-primary);
+        background-color: var(--color-secondary);
+      }
+
+      .reminder-option.selected {
+        border-color: var(--color-primary);
+        background-color: rgba(var(--color-teal-500-rgb), 0.1);
+      }
+
+      .reminder-option input[type='radio'] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      .reminder-option label {
+        flex: 1;
+        cursor: pointer;
+        font-size: var(--font-size-base);
+        color: var(--color-text);
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: var(--space-12);
+        justify-content: flex-end;
+      }
+
+      .modal-button {
+        padding: var(--space-12) var(--space-20);
+        border: none;
+        border-radius: var(--radius-base);
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-medium);
+        cursor: pointer;
+        transition: all var(--duration-fast) var(--ease-standard);
+        font-family: var(--font-family-base);
+      }
+
+      .modal-button.primary {
+        background-color: var(--color-primary);
+        color: var(--color-btn-primary-text);
+      }
+
+      .modal-button.primary:hover {
+        background-color: var(--color-primary-hover);
+      }
+
+      .modal-button.secondary {
+        background-color: var(--color-secondary);
+        color: var(--color-text);
+      }
+
+      .modal-button.secondary:hover {
+        background-color: var(--color-secondary-hover);
+      }
+
+      .notification-permission {
+        padding: var(--space-12);
+        background-color: rgba(var(--color-warning-rgb), 0.1);
+        border: 1px solid rgba(var(--color-warning-rgb), 0.3);
+        border-radius: var(--radius-base);
+        margin-bottom: var(--space-16);
+        font-size: var(--font-size-sm);
+        color: var(--color-text);
       }
 
       .no-results {
@@ -449,12 +620,26 @@
           gap: var(--space-8);
         }
 
+        .task-time,
+        .task-responsible,
+        .task-status {
+          align-self: start;
+        }
+
         .task-status {
           justify-self: start;
         }
 
+        .reminder-badge {
+          margin-top: var(--space-8);
+        }
+
         .stats-grid {
           grid-template-columns: 1fr 1fr;
+        }
+
+        .modal {
+          max-width: 95%;
         }
       }
     </style>
@@ -470,8 +655,8 @@
         <input type="text" id="searchInput" class="search-box" placeholder="搜尋任務或負責人..." />
 
         <div class="view-tabs">
-          <button class="tab-button active" data-view="stage">階段視圖</button>
-          <button class="tab-button" data-view="timeline">時間軸視圖</button>
+          <button class="tab-button active" data-view="timeline">時間軸視圖</button>
+          <button class="tab-button" data-view="stage">階段視圖</button>
           <button class="tab-button" data-view="responsible">負責人視圖</button>
           <button class="tab-button" data-view="stats">統計視圖</button>
         </div>
@@ -499,6 +684,40 @@
       <div id="tasksContainer" class="tasks-container"></div>
     </div>
 
+    <!-- Reminder Modal -->
+    <div id="reminderModal" class="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">設置提醒</div>
+        <div class="modal-task-info">
+          <div class="modal-task-time" id="modalTaskTime"></div>
+          <div class="modal-task-desc" id="modalTaskDesc"></div>
+        </div>
+        <div id="notificationWarning" class="notification-permission" style="display: none">⚠️ 請允許瀏覽器通知權限以接收提醒</div>
+        <div class="reminder-options">
+          <div class="reminder-option" data-value="0">
+            <input type="radio" name="reminder" id="reminder-none" value="0" />
+            <label for="reminder-none">不設提醒</label>
+          </div>
+          <div class="reminder-option" data-value="5">
+            <input type="radio" name="reminder" id="reminder-5" value="5" />
+            <label for="reminder-5">⏰ 提前 5 分鐘</label>
+          </div>
+          <div class="reminder-option" data-value="10">
+            <input type="radio" name="reminder" id="reminder-10" value="10" />
+            <label for="reminder-10">⏰ 提前 10 分鐘</label>
+          </div>
+          <div class="reminder-option" data-value="15">
+            <input type="radio" name="reminder" id="reminder-15" value="15" />
+            <label for="reminder-15">⏰ 提前 15 分鐘</label>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="modal-button secondary" onclick="closeReminderModal()">取消</button>
+          <button class="modal-button primary" onclick="saveReminder()">確認</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // Dark mode support
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -514,59 +733,59 @@
 
       // Task data (default)
       const tasksData = [
-        { time: '04:30', stage: '新娘準備', description: 'Nam起身梳洗化妝', responsible: '朱珊', status: '未開始' },
-        { time: '05:30', stage: '新郎準備', description: 'Sam起身', responsible: 'Sam', status: '未開始' },
-        { time: '05:35', stage: '新郎準備', description: '梳洗早餐', responsible: 'Sam', status: '未開始' },
-        { time: '06:00', stage: '新郎準備', description: 'Sam康城出門', responsible: 'Sam', status: '未開始' },
-        { time: '07:00', stage: '新郎準備', description: 'Sam到黃埔化妝著褂', responsible: 'Sam', status: '未開始' },
-        { time: '07:00', stage: '新娘準備', description: '家姐到酒店', responsible: '家姐', status: '未開始' },
-        { time: '07:15', stage: '新郎方', description: '兄弟著衫,黃埔早餐', responsible: 'Ivan', status: '未開始' },
-        { time: '07:45', stage: '新郎準備', description: '新郎ready', responsible: 'Sam', status: '未開始' },
-        { time: '07:45', stage: '新娘方', description: '爸爸接婆婆到酒店', responsible: '爸爸', status: '未開始' },
-        { time: '08:00', stage: '佈置準備', description: '聯絡花車、28座(確認時間)', responsible: 'Sam', status: '未開始' },
-        { time: '08:00', stage: '佈置準備', description: '佈置花車(外面馬路邊)', responsible: 'Ivan', status: '未開始' },
-        { time: '08:00', stage: '佈置準備', description: '攝影師新娘房集合', responsible: '攝影師', status: '未開始' },
-        { time: '08:00', stage: '協調', description: '確認親戚到齊、化妝完成', responsible: '朱珊', status: '未開始' },
-        { time: '08:00', stage: '外景', description: '兄弟影外景(黃埔海旁)', responsible: 'Ivan', status: '未開始' },
-        { time: '08:45', stage: '新郎家準備', description: '男家康城集合', responsible: 'Kevin', status: '未開始' },
-        { time: '08:55', stage: '開門儀式', description: '準備物資(細房)', responsible: 'Sam', status: '未開始' },
-        { time: '09:00', stage: '開門儀式', description: '開門', responsible: '自恩', status: '未開始' },
-        { time: '09:00', stage: '開門儀式', description: '玩兄弟、接新娘', responsible: '新郎方', status: '未開始' },
-        { time: '09:00', stage: '新郎家準備', description: '徐媽媽+姐姐化妝', responsible: '化妝師', status: '未開始' },
-        { time: '09:20', stage: '開門儀式', description: '愛的宣言', responsible: '新郎新娘', status: '未開始' },
-        { time: '09:25', stage: '開門儀式', description: '媽咪感言', responsible: '媽媽們', status: '未開始' },
-        { time: '09:30', stage: '敬茶儀式', description: '敬茶(新娘方)', responsible: '朱珊、梅寶、高ling、真c、Gloria', status: '未開始' },
-        { time: '09:50', stage: '敬茶儀式', description: '敬茶完成', responsible: '協調者', status: '未開始' },
-        { time: '09:55', stage: '出門準備', description: '開始收拾、final check酒店', responsible: '自恩、Carol', status: '未開始' },
-        { time: '09:55', stage: '出門準備', description: '聯絡花車28座', responsible: '自恩', status: '未開始' },
-        { time: '10:00', stage: '出門準備', description: '花車、28座到達', responsible: '司機們', status: '未開始' },
-        { time: '10:10', stage: '出門', description: '新人出門拎紅傘', responsible: '新郎新娘', status: '未開始' },
-        { time: '10:15', stage: '出門', description: '新人花車、28座黃埔出發', responsible: '司機', status: '未開始' },
-        { time: '10:30', stage: '新郎家準備', description: '男家家人到齊、化妝完成', responsible: 'Kevin', status: '未開始' },
-        { time: '10:45', stage: '入門儀式', description: '新人到男家', responsible: 'Ivan、朱珊、梅寶', status: '未開始' },
-        { time: '10:55', stage: '敬茶儀式', description: '敬茶(新郎方)', responsible: 'Ivan、朱珊、梅寶', status: '未開始' },
-        { time: '11:15', stage: '出門準備', description: '敬茶完成、簡單收拾', responsible: '自恩、Ivan', status: '未開始' },
-        { time: '11:25', stage: '出門', description: '出門', responsible: '協調者', status: '未開始' },
-        { time: '11:30', stage: '出門', description: '新人花車28座康城出發', responsible: '司機', status: '未開始' },
-        { time: '11:50', stage: '教堂準備', description: '新人到教堂、新郎換衫', responsible: 'Sam', status: '未開始' },
-        { time: '12:00', stage: '教堂準備', description: '兄弟姊妹、親友食飯(1小時)', responsible: 'Kevin、Ivan', status: '未開始' },
-        { time: '12:00', stage: '教堂準備', description: '花佈置隊(Rex team)到達教堂', responsible: 'Sam、Rex', status: '未開始' },
-        { time: '12:30', stage: '教堂準備', description: '佈置隊(Angel team)到達教堂', responsible: 'Angel', status: '未開始' },
-        { time: '12:40', stage: '教堂準備', description: '舞蹈隊rehearsal', responsible: 'Ps. Lily', status: '未開始' },
-        { time: '12:50', stage: '教堂準備', description: '新人伴娘快食', responsible: 'Sam、Nam、朱珊', status: '未開始' },
-        { time: '13:00', stage: '教堂準備', description: '敬拜隊、舞蹈隊rehearsal', responsible: 'Ps. Lily', status: '未開始' },
-        { time: '13:15', stage: '教堂準備', description: '兄弟姊妹返到教堂', responsible: 'Ivan', status: '未開始' },
-        { time: '13:25', stage: '教堂準備', description: '詩班rehearsal', responsible: 'Ps. Lily', status: '未開始' },
-        { time: '13:30', stage: '教堂準備', description: '主禮人、新人、父母、花仔花女集合', responsible: 'Sam', status: '未開始' },
-        { time: '13:40', stage: '教堂準備', description: '花仔花女Rehearsal', responsible: '協調者', status: '未開始' },
-        { time: '14:00', stage: '証婚', description: '開始行禮', responsible: 'Samuel', status: '未開始' },
-        { time: '16:00', stage: '証婚', description: '禮成(拍照分享)', responsible: 'Samuel', status: '未開始' },
-        { time: '17:00', stage: '晚宴', description: '新郎新娘換晚裝', responsible: 'Sam、Nam', status: '未開始' },
-        { time: '17:00', stage: '晚宴', description: '佈置隊開始setup', responsible: 'Angel、Ivan', status: '未開始' },
-        { time: '17:30', stage: '晚宴', description: '迎賓+協調', responsible: 'Sam、Kevin', status: '未開始' },
-        { time: '18:00', stage: '晚宴', description: '同酒樓final rehearsal', responsible: 'Sam、Samuel、Ivan', status: '未開始' },
-        { time: '18:15', stage: '晚宴', description: '切蛋糕', responsible: 'Ivan', status: '未開始' },
-        { time: '20:00', stage: '晚宴', description: '晚宴完', responsible: '協調者', status: '未開始' },
+        { time: '04:30', stage: '新娘準備', description: 'Nam起身梳洗化妝', responsible: '朱珊', status: '未開始', reminder: 0 },
+        { time: '05:30', stage: '新郎準備', description: 'Sam起身', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '05:35', stage: '新郎準備', description: '梳洗早餐', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '06:00', stage: '新郎準備', description: 'Sam康城出門', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '07:00', stage: '新郎準備', description: 'Sam到黃埔化妝著褂', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '07:00', stage: '新娘準備', description: '家姐到酒店', responsible: '家姐', status: '未開始', reminder: 0 },
+        { time: '07:15', stage: '新郎方', description: '兄弟著衫,黃埔早餐', responsible: 'Ivan', status: '未開始', reminder: 0 },
+        { time: '07:45', stage: '新郎準備', description: '新郎ready', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '07:45', stage: '新娘方', description: '爸爸接婆婆到酒店', responsible: '爸爸', status: '未開始', reminder: 0 },
+        { time: '08:00', stage: '佈置準備', description: '聯絡花車、28座(確認時間)', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '08:00', stage: '佈置準備', description: '佈置花車(外面馬路邊)', responsible: 'Ivan', status: '未開始', reminder: 0 },
+        { time: '08:00', stage: '佈置準備', description: '攝影師新娘房集合', responsible: '攝影師', status: '未開始', reminder: 0 },
+        { time: '08:00', stage: '協調', description: '確認親戚到齊、化妝完成', responsible: '朱珊', status: '未開始', reminder: 0 },
+        { time: '08:00', stage: '外景', description: '兄弟影外景(黃埔海旁)', responsible: 'Ivan', status: '未開始', reminder: 0 },
+        { time: '08:45', stage: '新郎家準備', description: '男家康城集合', responsible: 'Kevin', status: '未開始', reminder: 0 },
+        { time: '08:55', stage: '開門儀式', description: '準備物資(細房)', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '09:00', stage: '開門儀式', description: '開門', responsible: '自恩', status: '未開始', reminder: 0 },
+        { time: '09:00', stage: '開門儀式', description: '玩兄弟、接新娘', responsible: '新郎方', status: '未開始', reminder: 0 },
+        { time: '09:00', stage: '新郎家準備', description: '徐媽媽+姐姐化妝', responsible: '化妝師', status: '未開始', reminder: 0 },
+        { time: '09:20', stage: '開門儀式', description: '愛的宣言', responsible: '新郎新娘', status: '未開始', reminder: 0 },
+        { time: '09:25', stage: '開門儀式', description: '媽咪感言', responsible: '媽媽們', status: '未開始', reminder: 0 },
+        { time: '09:30', stage: '敬茶儀式', description: '敬茶(新娘方)', responsible: '朱珊、梅寶、高ling、真c、Gloria', status: '未開始', reminder: 0 },
+        { time: '09:50', stage: '敬茶儀式', description: '敬茶完成', responsible: '協調者', status: '未開始', reminder: 0 },
+        { time: '09:55', stage: '出門準備', description: '開始收拾、final check酒店', responsible: '自恩、Carol', status: '未開始', reminder: 0 },
+        { time: '09:55', stage: '出門準備', description: '聯絡花車28座', responsible: '自恩', status: '未開始', reminder: 0 },
+        { time: '10:00', stage: '出門準備', description: '花車、28座到達', responsible: '司機們', status: '未開始', reminder: 0 },
+        { time: '10:10', stage: '出門', description: '新人出門拎紅傘', responsible: '新郎新娘', status: '未開始', reminder: 0 },
+        { time: '10:15', stage: '出門', description: '新人花車、28座黃埔出發', responsible: '司機', status: '未開始', reminder: 0 },
+        { time: '10:30', stage: '新郎家準備', description: '男家家人到齊、化妝完成', responsible: 'Kevin', status: '未開始', reminder: 0 },
+        { time: '10:45', stage: '入門儀式', description: '新人到男家', responsible: 'Ivan、朱珊、梅寶', status: '未開始', reminder: 0 },
+        { time: '10:55', stage: '敬茶儀式', description: '敬茶(新郎方)', responsible: 'Ivan、朱珊、梅寶', status: '未開始', reminder: 0 },
+        { time: '11:15', stage: '出門準備', description: '敬茶完成、簡單收拾', responsible: '自恩、Ivan', status: '未開始', reminder: 0 },
+        { time: '11:25', stage: '出門', description: '出門', responsible: '協調者', status: '未開始', reminder: 0 },
+        { time: '11:30', stage: '出門', description: '新人花車28座康城出發', responsible: '司機', status: '未開始', reminder: 0 },
+        { time: '11:50', stage: '教堂準備', description: '新人到教堂、新郎換衫', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '12:00', stage: '教堂準備', description: '兄弟姊妹、親友食飯(1小時)', responsible: 'Kevin、Ivan', status: '未開始', reminder: 0 },
+        { time: '12:00', stage: '教堂準備', description: '花佈置隊(Rex team)到達教堂', responsible: 'Sam、Rex', status: '未開始', reminder: 0 },
+        { time: '12:30', stage: '教堂準備', description: '佈置隊(Angel team)到達教堂', responsible: 'Angel', status: '未開始', reminder: 0 },
+        { time: '12:40', stage: '教堂準備', description: '舞蹈隊rehearsal', responsible: 'Ps. Lily', status: '未開始', reminder: 0 },
+        { time: '12:50', stage: '教堂準備', description: '新人伴娘快食', responsible: 'Sam、Nam、朱珊', status: '未開始', reminder: 0 },
+        { time: '13:00', stage: '教堂準備', description: '敬拜隊、舞蹈隊rehearsal', responsible: 'Ps. Lily', status: '未開始', reminder: 0 },
+        { time: '13:15', stage: '教堂準備', description: '兄弟姊妹返到教堂', responsible: 'Ivan', status: '未開始', reminder: 0 },
+        { time: '13:25', stage: '教堂準備', description: '詩班rehearsal', responsible: 'Ps. Lily', status: '未開始', reminder: 0 },
+        { time: '13:30', stage: '教堂準備', description: '主禮人、新人、父母、花仔花女集合', responsible: 'Sam', status: '未開始', reminder: 0 },
+        { time: '13:40', stage: '教堂準備', description: '花仔花女Rehearsal', responsible: '協調者', status: '未開始', reminder: 0 },
+        { time: '14:00', stage: '証婚', description: '開始行禮', responsible: 'Samuel', status: '未開始', reminder: 0 },
+        { time: '16:00', stage: '証婚', description: '禮成(拍照分享)', responsible: 'Samuel', status: '未開始', reminder: 0 },
+        { time: '17:00', stage: '晚宴', description: '新郎新娘換晚裝', responsible: 'Sam、Nam', status: '未開始', reminder: 0 },
+        { time: '17:00', stage: '晚宴', description: '佈置隊開始setup', responsible: 'Angel、Ivan', status: '未開始', reminder: 0 },
+        { time: '17:30', stage: '晚宴', description: '迎賓+協調', responsible: 'Sam、Kevin', status: '未開始', reminder: 0 },
+        { time: '18:00', stage: '晚宴', description: '同酒樓final rehearsal', responsible: 'Sam、Samuel、Ivan', status: '未開始', reminder: 0 },
+        { time: '18:15', stage: '晚宴', description: '切蛋糕', responsible: 'Ivan', status: '未開始', reminder: 0 },
+        { time: '20:00', stage: '晚宴', description: '晚宴完', responsible: '協調者', status: '未開始', reminder: 0 },
       ];
 
       // LocalStorage keys
@@ -615,6 +834,12 @@
       let currentView = savedData.view;
       let searchQuery = savedData.search;
 
+      // Ensure all tasks have reminder field
+      tasks = tasks.map((task) => ({
+        ...task,
+        reminder: task.reminder !== undefined ? task.reminder : 0,
+      }));
+
       // Status cycle
       const statusCycle = ['未開始', '進行中', '完成'];
       const statusClasses = {
@@ -623,13 +848,110 @@
         完成: 'completed',
       };
 
+      // Reminder management
+      let currentReminderTaskIndex = null;
+      let notifiedTasks = new Set();
+      let reminderCheckInterval = null;
+
       // Initialize app
       function init() {
         setupEventListeners();
         restoreViewState();
         updateStats();
         renderTasks();
+        requestNotificationPermission();
+        startReminderCheck();
       }
+
+      // Request notification permission
+      async function requestNotificationPermission() {
+        if ('Notification' in window && Notification.permission === 'default') {
+          try {
+            await Notification.requestPermission();
+          } catch (e) {
+            console.error('Error requesting notification permission:', e);
+          }
+        }
+      }
+
+      // Open reminder modal
+      function openReminderModal(taskIndex, event) {
+        if (event) {
+          event.stopPropagation();
+        }
+
+        const task = tasks[taskIndex];
+        currentReminderTaskIndex = taskIndex;
+
+        document.getElementById('modalTaskTime').textContent = task.time;
+        document.getElementById('modalTaskDesc').textContent = task.description;
+
+        // Show notification warning if permission not granted
+        const notificationWarning = document.getElementById('notificationWarning');
+        if ('Notification' in window && Notification.permission !== 'granted') {
+          notificationWarning.style.display = 'block';
+        } else {
+          notificationWarning.style.display = 'none';
+        }
+
+        // Set current reminder value
+        const reminderValue = task.reminder || 0;
+        document.querySelectorAll('input[name="reminder"]').forEach((radio) => {
+          radio.checked = parseInt(radio.value) === reminderValue;
+        });
+
+        // Update selected class
+        document.querySelectorAll('.reminder-option').forEach((option) => {
+          const value = parseInt(option.dataset.value);
+          if (value === reminderValue) {
+            option.classList.add('selected');
+          } else {
+            option.classList.remove('selected');
+          }
+        });
+
+        document.getElementById('reminderModal').classList.add('active');
+      }
+
+      // Close reminder modal
+      function closeReminderModal() {
+        document.getElementById('reminderModal').classList.remove('active');
+        currentReminderTaskIndex = null;
+      }
+
+      // Save reminder
+      function saveReminder() {
+        if (currentReminderTaskIndex === null) return;
+
+        const selectedRadio = document.querySelector('input[name="reminder"]:checked');
+        const reminderValue = selectedRadio ? parseInt(selectedRadio.value) : 0;
+
+        const task = tasks[currentReminderTaskIndex];
+        const oldReminder = task.reminder;
+
+        // Clear old notification flag if reminder changed
+        if (oldReminder !== reminderValue) {
+          const oldNotificationKey = `${currentReminderTaskIndex}-${task.time}-${oldReminder}`;
+          notifiedTasks.delete(oldNotificationKey);
+        }
+
+        task.reminder = reminderValue;
+        saveToStorage();
+        renderTasks();
+        closeReminderModal();
+
+        // Request permission if not granted
+        if (reminderValue > 0 && 'Notification' in window && Notification.permission === 'default') {
+          Notification.requestPermission();
+        }
+      }
+
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', () => {
+        if (reminderCheckInterval) {
+          clearInterval(reminderCheckInterval);
+        }
+      });
 
       // Restore view state
       function restoreViewState() {
@@ -668,6 +990,86 @@
           saveToStorage();
           renderTasks();
         });
+
+        // Modal reminder options
+        document.querySelectorAll('.reminder-option').forEach((option) => {
+          option.addEventListener('click', function () {
+            const radio = this.querySelector('input[type="radio"]');
+            radio.checked = true;
+
+            document.querySelectorAll('.reminder-option').forEach((opt) => {
+              opt.classList.remove('selected');
+            });
+            this.classList.add('selected');
+          });
+        });
+
+        // Close modal on overlay click
+        document.getElementById('reminderModal').addEventListener('click', function (e) {
+          if (e.target === this) {
+            closeReminderModal();
+          }
+        });
+      }
+
+      // Start reminder check
+      function startReminderCheck() {
+        // Check every 30 seconds
+        reminderCheckInterval = setInterval(checkReminders, 30000);
+        // Also check immediately
+        checkReminders();
+      }
+
+      // Check for reminders
+      function checkReminders() {
+        if ('Notification' in window && Notification.permission !== 'granted') {
+          return;
+        }
+
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentTimeInMinutes = currentHour * 60 + currentMinute;
+
+        tasks.forEach((task, index) => {
+          // Skip if no reminder set or task is completed
+          if (!task.reminder || task.reminder === 0 || task.status === '完成') {
+            return;
+          }
+
+          // Skip if already notified
+          const notificationKey = `${index}-${task.time}-${task.reminder}`;
+          if (notifiedTasks.has(notificationKey)) {
+            return;
+          }
+
+          const [taskHour, taskMinute] = task.time.split(':').map(Number);
+          const taskTimeInMinutes = taskHour * 60 + taskMinute;
+          const reminderTimeInMinutes = taskTimeInMinutes - task.reminder;
+
+          // Check if it's time to notify (within 1 minute window)
+          if (currentTimeInMinutes >= reminderTimeInMinutes && currentTimeInMinutes < reminderTimeInMinutes + 1) {
+            sendNotification(task, index);
+            notifiedTasks.add(notificationKey);
+          }
+        });
+      }
+
+      // Send notification
+      function sendNotification(task, index) {
+        if ('Notification' in window && Notification.permission === 'granted') {
+          const notification = new Notification('婚禮任務提醒 ⏰', {
+            body: `${task.time} - ${task.description}\n負責人: ${task.responsible}`,
+            icon: '🔔',
+            tag: `task-${index}`,
+            requireInteraction: true,
+          });
+
+          notification.onclick = function () {
+            window.focus();
+            notification.close();
+          };
+        }
       }
 
       // Toggle task status
@@ -676,6 +1078,13 @@
         const currentStatusIndex = statusCycle.indexOf(task.status);
         const nextStatusIndex = (currentStatusIndex + 1) % statusCycle.length;
         task.status = statusCycle[nextStatusIndex];
+
+        // Clear notification flag when status changes
+        if (task.status === '完成') {
+          const notificationKey = `${index}-${task.time}-${task.reminder}`;
+          notifiedTasks.delete(notificationKey);
+        }
+
         saveToStorage();
         updateStats();
         renderTasks();
@@ -787,12 +1196,31 @@
             const statusClass = statusClasses[task.status];
             const timeClass = task.status !== '完成' ? timeStatus : '';
 
+            // Reminder badge
+            let reminderBadge = '';
+            if (task.reminder && task.reminder > 0) {
+              reminderBadge = `
+                <div class="reminder-badge" onclick="openReminderModal(${originalIndex}, event)">
+                  <span class="reminder-icon">⏰</span>
+                  <span>提前 ${task.reminder} 分鐘</span>
+                </div>
+              `;
+            } else {
+              reminderBadge = `
+                <div class="reminder-badge" onclick="openReminderModal(${originalIndex}, event)" style="opacity: 0.5;">
+                  <span class="reminder-icon">🔔</span>
+                  <span>設置提醒</span>
+                </div>
+              `;
+            }
+
             html += `
             <div class="task-item ${statusClass} ${timeClass}" onclick="toggleTaskStatus(${originalIndex})">
               <div class="task-time">${task.time}</div>
               <div class="task-content">
                 <div class="task-description">${task.description}</div>
                 <div class="task-stage">${task.stage}</div>
+                ${reminderBadge}
               </div>
               <div class="task-responsible">${task.responsible}</div>
               <div class="task-status ${statusClass}">${task.status}</div>
