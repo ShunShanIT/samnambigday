@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>婚禮任務管理系統</title>
+    <style>
+      :root {
+        /* Primitive Color Tokens */
+        --color-white: rgba(255, 255, 255, 1);
+        --color-black: rgba(0, 0, 0, 1);
+        --color-cream-50: rgba(252, 252, 249, 1);
+        --color-cream-100: rgba(255, 255, 253, 1);
+        --color-gray-200: rgba(245, 245, 245, 1);
+        --color-gray-300: rgba(167, 169, 169, 1);
+        --color-gray-400: rgba(119, 124, 124, 1);
+        --color-slate-500: rgba(98, 108, 113, 1);
+        --color-brown-600: rgba(94, 82, 64, 1);
+        --color-charcoal-700: rgba(31, 33, 33, 1);
+        --color-charcoal-800: rgba(38, 40, 40, 1);
+        --color-slate-900: rgba(19, 52, 59, 1);
+        --color-teal-300: rgba(50, 184, 198, 1);
+        --color-teal-400: rgba(45, 166, 178, 1);
+        --color-teal-500: rgba(33, 128, 141, 1);
+        --color-teal-600: rgba(29, 116, 128, 1);
+        --color-teal-700: rgba(26, 104, 115, 1);
+        --color-teal-800: rgba(41, 150, 161, 1);
+        --color-red-400: rgba(255, 84, 89, 1);
+        --color-red-500: rgba(192, 21, 47, 1);
+        --color-orange-400: rgba(230, 129, 97, 1);
+        --color-orange-500: rgba(168, 75, 47, 1);
+
+        --color-brown-600-rgb: 94, 82, 64;
+        --color-teal-500-rgb: 33, 128, 141;
+        --color-slate-900-rgb: 19, 52, 59;
+        --color-slate-500-rgb: 98, 108, 113;
+        --color-red-500-rgb: 192, 21, 47;
+        --color-red-400-rgb: 255, 84, 89;
+        --color-orange-500-rgb: 168, 75, 47;
+        --color-orange-400-rgb: 230, 129, 97;
+
+        --color-bg-1: rgba(59, 130, 246, 0.08);
+        --color-bg-2: rgba(245, 158, 11, 0.08);
+        --color-bg-3: rgba(34, 197, 94, 0.08);
+        --color-bg-4: rgba(239, 68, 68, 0.08);
+        --color-bg-5: rgba(147, 51, 234, 0.08);
+        --color-bg-6: rgba(249, 115, 22, 0.08);
+        --color-bg-7: rgba(236, 72, 153, 0.08);
+        --color-bg-8: rgba(6, 182, 212, 0.08);
+
+        --color-background: var(--color-cream-50);
+        --color-surface: var(--color-cream-100);
+        --color-text: var(--color-slate-900);
+        --color-text-secondary: var(--color-slate-500);
+        --color-primary: var(--color-teal-500);
+        --color-primary-hover: var(--color-teal-600);
+        --color-primary-active: var(--color-teal-700);
+        --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+        --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+        --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+        --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+        --color-btn-primary-text: var(--color-cream-50);
+        --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+        --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+        --color-error: var(--color-red-500);
+        --color-success: var(--color-teal-500);
+        --color-warning: var(--color-orange-500);
+        --color-info: var(--color-slate-500);
+        --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+        --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+        --focus-ring: 0 0 0 3px var(--color-focus-ring);
+        --focus-outline: 2px solid var(--color-primary);
+        --status-bg-opacity: 0.15;
+        --status-border-opacity: 0.25;
+
+        --color-success-rgb: 33, 128, 141;
+        --color-error-rgb: 192, 21, 47;
+        --color-warning-rgb: 168, 75, 47;
+        --color-info-rgb: 98, 108, 113;
+
+        --font-family-base: 'FKGroteskNeue', 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-size-xs: 11px;
+        --font-size-sm: 12px;
+        --font-size-base: 14px;
+        --font-size-md: 14px;
+        --font-size-lg: 16px;
+        --font-size-xl: 18px;
+        --font-size-2xl: 20px;
+        --font-size-3xl: 24px;
+        --font-size-4xl: 30px;
+        --font-weight-normal: 400;
+        --font-weight-medium: 500;
+        --font-weight-semibold: 550;
+        --font-weight-bold: 600;
+        --line-height-tight: 1.2;
+        --line-height-normal: 1.5;
+
+        --space-4: 4px;
+        --space-8: 8px;
+        --space-12: 12px;
+        --space-16: 16px;
+        --space-20: 20px;
+        --space-24: 24px;
+        --space-32: 32px;
+
+        --radius-sm: 6px;
+        --radius-base: 8px;
+        --radius-md: 10px;
+        --radius-lg: 12px;
+        --radius-full: 9999px;
+
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+
+        --duration-fast: 150ms;
+        --duration-normal: 250ms;
+        --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-gray-400-rgb: 119, 124, 124;
+          --color-teal-300-rgb: 50, 184, 198;
+          --color-gray-300-rgb: 167, 169, 169;
+          --color-gray-200-rgb: 245, 245, 245;
+
+          --color-bg-1: rgba(29, 78, 216, 0.15);
+          --color-bg-2: rgba(180, 83, 9, 0.15);
+          --color-bg-3: rgba(21, 128, 61, 0.15);
+          --color-bg-4: rgba(185, 28, 28, 0.15);
+          --color-bg-5: rgba(107, 33, 168, 0.15);
+          --color-bg-6: rgba(194, 65, 12, 0.15);
+          --color-bg-7: rgba(190, 24, 93, 0.15);
+          --color-bg-8: rgba(8, 145, 178, 0.15);
+
+          --color-background: var(--color-charcoal-700);
+          --color-surface: var(--color-charcoal-800);
+          --color-text: var(--color-gray-200);
+          --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+          --color-primary: var(--color-teal-300);
+          --color-primary-hover: var(--color-teal-400);
+          --color-primary-active: var(--color-teal-800);
+          --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+          --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+          --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+          --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+          --color-error: var(--color-red-400);
+          --color-success: var(--color-teal-300);
+          --color-warning: var(--color-orange-400);
+          --color-info: var(--color-gray-300);
+          --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+          --color-btn-primary-text: var(--color-slate-900);
+          --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+          --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+
+          --color-success-rgb: var(--color-teal-300-rgb);
+          --color-error-rgb: var(--color-red-400-rgb);
+          --color-warning-rgb: var(--color-orange-400-rgb);
+          --color-info-rgb: var(--color-gray-300-rgb);
+        }
+      }
+
+      @font-face {
+        font-family: 'FKGroteskNeue';
+        src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-family-base);
+        background-color: var(--color-background);
+        color: var(--color-text);
+        line-height: var(--line-height-normal);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .app-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: var(--space-24);
+      }
+
+      .app-header {
+        margin-bottom: var(--space-32);
+      }
+
+      .app-title {
+        font-size: var(--font-size-4xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-8);
+        color: var(--color-text);
+      }
+
+      .app-subtitle {
+        font-size: var(--font-size-lg);
+        color: var(--color-text-secondary);
+      }
+
+      .controls-section {
+        display: flex;
+        gap: var(--space-16);
+        margin-bottom: var(--space-24);
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .search-box {
+        flex: 1;
+        min-width: 250px;
+        padding: var(--space-12) var(--space-16);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-base);
+        background-color: var(--color-surface);
+        color: var(--color-text);
+        font-size: var(--font-size-base);
+        font-family: var(--font-family-base);
+      }
+
+      .search-box:focus {
+        outline: var(--focus-outline);
+        border-color: var(--color-primary);
+      }
+
+      .view-tabs {
+        display: flex;
+        gap: var(--space-8);
+        background-color: var(--color-secondary);
+        padding: var(--space-4);
+        border-radius: var(--radius-base);
+      }
+
+      .tab-button {
+        padding: var(--space-8) var(--space-16);
+        border: none;
+        background: transparent;
+        color: var(--color-text);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-medium);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: all var(--duration-fast) var(--ease-standard);
+        font-family: var(--font-family-base);
+      }
+
+      .tab-button:hover {
+        background-color: var(--color-secondary-hover);
+      }
+
+      .tab-button.active {
+        background-color: var(--color-primary);
+        color: var(--color-btn-primary-text);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--space-16);
+        margin-bottom: var(--space-32);
+      }
+
+      .stat-card {
+        background-color: var(--color-surface);
+        padding: var(--space-20);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--color-card-border);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .stat-label {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-8);
+        font-weight: var(--font-weight-medium);
+      }
+
+      .stat-value {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text);
+      }
+
+      .stat-card.completed .stat-value {
+        color: var(--color-success);
+      }
+
+      .stat-card.in-progress .stat-value {
+        color: var(--color-warning);
+      }
+
+      .stat-card.not-started .stat-value {
+        color: var(--color-error);
+      }
+
+      .tasks-container {
+        background-color: var(--color-surface);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--color-card-border);
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+      }
+
+      .group-section {
+        border-bottom: 1px solid var(--color-card-border-inner);
+      }
+
+      .group-section:last-child {
+        border-bottom: none;
+      }
+
+      .group-header {
+        padding: var(--space-16) var(--space-20);
+        background-color: var(--color-bg-1);
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .group-count {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+        font-weight: var(--font-weight-normal);
+      }
+
+      .task-item {
+        padding: var(--space-16) var(--space-20);
+        border-bottom: 1px solid var(--color-card-border-inner);
+        cursor: pointer;
+        transition: background-color var(--duration-fast) var(--ease-standard);
+        display: grid;
+        grid-template-columns: 80px 1fr 200px 120px;
+        gap: var(--space-16);
+        align-items: center;
+      }
+
+      .task-item:last-child {
+        border-bottom: none;
+      }
+
+      .task-item:hover {
+        background-color: var(--color-secondary);
+      }
+
+      .task-item.overdue {
+        border-left: 4px solid var(--color-error);
+      }
+
+      .task-item.upcoming {
+        border-left: 4px solid var(--color-primary);
+      }
+
+      .task-item.completed {
+        opacity: 0.7;
+      }
+
+      .task-time {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text);
+        font-family: var(--font-family-base);
+      }
+
+      .task-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+      }
+
+      .task-description {
+        font-size: var(--font-size-base);
+        color: var(--color-text);
+        font-weight: var(--font-weight-medium);
+      }
+
+      .task-stage {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+      }
+
+      .task-responsible {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+      }
+
+      .task-status {
+        display: inline-flex;
+        align-items: center;
+        padding: var(--space-8) var(--space-12);
+        border-radius: var(--radius-full);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-medium);
+        justify-self: end;
+      }
+
+      .task-status.not-started {
+        background-color: rgba(var(--color-error-rgb), var(--status-bg-opacity));
+        color: var(--color-error);
+        border: 1px solid rgba(var(--color-error-rgb), var(--status-border-opacity));
+      }
+
+      .task-status.in-progress {
+        background-color: rgba(var(--color-warning-rgb), var(--status-bg-opacity));
+        color: var(--color-warning);
+        border: 1px solid rgba(var(--color-warning-rgb), var(--status-border-opacity));
+      }
+
+      .task-status.completed {
+        background-color: rgba(var(--color-success-rgb), var(--status-bg-opacity));
+        color: var(--color-success);
+        border: 1px solid rgba(var(--color-success-rgb), var(--status-border-opacity));
+      }
+
+      .task-status.completed::before {
+        content: '✓ ';
+        font-weight: var(--font-weight-bold);
+      }
+
+      .no-results {
+        padding: var(--space-32);
+        text-align: center;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-lg);
+      }
+
+      @media (max-width: 768px) {
+        .app-container {
+          padding: var(--space-16);
+        }
+
+        .controls-section {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .view-tabs {
+          flex-wrap: wrap;
+        }
+
+        .task-item {
+          grid-template-columns: 1fr;
+          gap: var(--space-8);
+        }
+
+        .task-status {
+          justify-self: start;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1 class="app-title">婚禮任務管理系統</h1>
+        <p class="app-subtitle">Sam &amp; Nam 婚禮日程追蹤</p>
+      </header>
+
+      <div class="controls-section">
+        <input type="text" id="searchInput" class="search-box" placeholder="搜尋任務或負責人..." />
+
+        <div class="view-tabs">
+          <button class="tab-button active" data-view="stage">階段視圖</button>
+          <button class="tab-button" data-view="timeline">時間軸視圖</button>
+          <button class="tab-button" data-view="responsible">負責人視圖</button>
+          <button class="tab-button" data-view="stats">統計視圖</button>
+        </div>
+      </div>
+
+      <div id="statsSection" class="stats-grid" style="display: none">
+        <div class="stat-card completed">
+          <div class="stat-label">已完成</div>
+          <div class="stat-value" id="completedCount">0</div>
+        </div>
+        <div class="stat-card in-progress">
+          <div class="stat-label">進行中</div>
+          <div class="stat-value" id="inProgressCount">0</div>
+        </div>
+        <div class="stat-card not-started">
+          <div class="stat-label">未開始</div>
+          <div class="stat-value" id="notStartedCount">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">整體進度</div>
+          <div class="stat-value" id="progressPercentage">0%</div>
+        </div>
+      </div>
+
+      <div id="tasksContainer" class="tasks-container"></div>
+    </div>
+
+    <script>
+      // Dark mode support
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+        if (event.matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      });
+
+      // Task data (default)
+      const tasksData = [
+        { time: '04:30', stage: '新娘準備', description: 'Nam起身梳洗化妝', responsible: '朱珊', status: '未開始' },
+        { time: '05:30', stage: '新郎準備', description: 'Sam起身', responsible: 'Sam', status: '未開始' },
+        { time: '05:35', stage: '新郎準備', description: '梳洗早餐', responsible: 'Sam', status: '未開始' },
+        { time: '06:00', stage: '新郎準備', description: 'Sam康城出門', responsible: 'Sam', status: '未開始' },
+        { time: '07:00', stage: '新郎準備', description: 'Sam到黃埔化妝著褂', responsible: 'Sam', status: '未開始' },
+        { time: '07:00', stage: '新娘準備', description: '家姐到酒店', responsible: '家姐', status: '未開始' },
+        { time: '07:15', stage: '新郎方', description: '兄弟著衫,黃埔早餐', responsible: 'Ivan', status: '未開始' },
+        { time: '07:45', stage: '新郎準備', description: '新郎ready', responsible: 'Sam', status: '未開始' },
+        { time: '07:45', stage: '新娘方', description: '爸爸接婆婆到酒店', responsible: '爸爸', status: '未開始' },
+        { time: '08:00', stage: '佈置準備', description: '聯絡花車、28座(確認時間)', responsible: 'Sam', status: '未開始' },
+        { time: '08:00', stage: '佈置準備', description: '佈置花車(外面馬路邊)', responsible: 'Ivan', status: '未開始' },
+        { time: '08:00', stage: '佈置準備', description: '攝影師新娘房集合', responsible: '攝影師', status: '未開始' },
+        { time: '08:00', stage: '協調', description: '確認親戚到齊、化妝完成', responsible: '朱珊', status: '未開始' },
+        { time: '08:00', stage: '外景', description: '兄弟影外景(黃埔海旁)', responsible: 'Ivan', status: '未開始' },
+        { time: '08:45', stage: '新郎家準備', description: '男家康城集合', responsible: 'Kevin', status: '未開始' },
+        { time: '08:55', stage: '開門儀式', description: '準備物資(細房)', responsible: 'Sam', status: '未開始' },
+        { time: '09:00', stage: '開門儀式', description: '開門', responsible: '自恩', status: '未開始' },
+        { time: '09:00', stage: '開門儀式', description: '玩兄弟、接新娘', responsible: '新郎方', status: '未開始' },
+        { time: '09:00', stage: '新郎家準備', description: '徐媽媽+姐姐化妝', responsible: '化妝師', status: '未開始' },
+        { time: '09:20', stage: '開門儀式', description: '愛的宣言', responsible: '新郎新娘', status: '未開始' },
+        { time: '09:25', stage: '開門儀式', description: '媽咪感言', responsible: '媽媽們', status: '未開始' },
+        { time: '09:30', stage: '敬茶儀式', description: '敬茶(新娘方)', responsible: '朱珊、梅寶、高ling、真c、Gloria', status: '未開始' },
+        { time: '09:50', stage: '敬茶儀式', description: '敬茶完成', responsible: '協調者', status: '未開始' },
+        { time: '09:55', stage: '出門準備', description: '開始收拾、final check酒店', responsible: '自恩、Carol', status: '未開始' },
+        { time: '09:55', stage: '出門準備', description: '聯絡花車28座', responsible: '自恩', status: '未開始' },
+        { time: '10:00', stage: '出門準備', description: '花車、28座到達', responsible: '司機們', status: '未開始' },
+        { time: '10:10', stage: '出門', description: '新人出門拎紅傘', responsible: '新郎新娘', status: '未開始' },
+        { time: '10:15', stage: '出門', description: '新人花車、28座黃埔出發', responsible: '司機', status: '未開始' },
+        { time: '10:30', stage: '新郎家準備', description: '男家家人到齊、化妝完成', responsible: 'Kevin', status: '未開始' },
+        { time: '10:45', stage: '入門儀式', description: '新人到男家', responsible: 'Ivan、朱珊、梅寶', status: '未開始' },
+        { time: '10:55', stage: '敬茶儀式', description: '敬茶(新郎方)', responsible: 'Ivan、朱珊、梅寶', status: '未開始' },
+        { time: '11:15', stage: '出門準備', description: '敬茶完成、簡單收拾', responsible: '自恩、Ivan', status: '未開始' },
+        { time: '11:25', stage: '出門', description: '出門', responsible: '協調者', status: '未開始' },
+        { time: '11:30', stage: '出門', description: '新人花車28座康城出發', responsible: '司機', status: '未開始' },
+        { time: '11:50', stage: '教堂準備', description: '新人到教堂、新郎換衫', responsible: 'Sam', status: '未開始' },
+        { time: '12:00', stage: '教堂準備', description: '兄弟姊妹、親友食飯(1小時)', responsible: 'Kevin、Ivan', status: '未開始' },
+        { time: '12:00', stage: '教堂準備', description: '花佈置隊(Rex team)到達教堂', responsible: 'Sam、Rex', status: '未開始' },
+        { time: '12:30', stage: '教堂準備', description: '佈置隊(Angel team)到達教堂', responsible: 'Angel', status: '未開始' },
+        { time: '12:40', stage: '教堂準備', description: '舞蹈隊rehearsal', responsible: 'Ps. Lily', status: '未開始' },
+        { time: '12:50', stage: '教堂準備', description: '新人伴娘快食', responsible: 'Sam、Nam、朱珊', status: '未開始' },
+        { time: '13:00', stage: '教堂準備', description: '敬拜隊、舞蹈隊rehearsal', responsible: 'Ps. Lily', status: '未開始' },
+        { time: '13:15', stage: '教堂準備', description: '兄弟姊妹返到教堂', responsible: 'Ivan', status: '未開始' },
+        { time: '13:25', stage: '教堂準備', description: '詩班rehearsal', responsible: 'Ps. Lily', status: '未開始' },
+        { time: '13:30', stage: '教堂準備', description: '主禮人、新人、父母、花仔花女集合', responsible: 'Sam', status: '未開始' },
+        { time: '13:40', stage: '教堂準備', description: '花仔花女Rehearsal', responsible: '協調者', status: '未開始' },
+        { time: '14:00', stage: '証婚', description: '開始行禮', responsible: 'Samuel', status: '未開始' },
+        { time: '16:00', stage: '証婚', description: '禮成(拍照分享)', responsible: 'Samuel', status: '未開始' },
+        { time: '17:00', stage: '晚宴', description: '新郎新娘換晚裝', responsible: 'Sam、Nam', status: '未開始' },
+        { time: '17:00', stage: '晚宴', description: '佈置隊開始setup', responsible: 'Angel、Ivan', status: '未開始' },
+        { time: '17:30', stage: '晚宴', description: '迎賓+協調', responsible: 'Sam、Kevin', status: '未開始' },
+        { time: '18:00', stage: '晚宴', description: '同酒樓final rehearsal', responsible: 'Sam、Samuel、Ivan', status: '未開始' },
+        { time: '18:15', stage: '晚宴', description: '切蛋糕', responsible: 'Ivan', status: '未開始' },
+        { time: '20:00', stage: '晚宴', description: '晚宴完', responsible: '協調者', status: '未開始' },
+      ];
+
+      // LocalStorage keys
+      const STORAGE_KEYS = {
+        TASKS: 'wedding_tasks',
+        VIEW: 'wedding_view',
+        SEARCH: 'wedding_search',
+      };
+
+      // Load data from localStorage
+      function loadFromStorage() {
+        try {
+          const savedTasks = localStorage.getItem(STORAGE_KEYS.TASKS);
+          const savedView = localStorage.getItem(STORAGE_KEYS.VIEW);
+          const savedSearch = localStorage.getItem(STORAGE_KEYS.SEARCH);
+
+          return {
+            tasks: savedTasks ? JSON.parse(savedTasks) : [...tasksData],
+            view: savedView || 'stage',
+            search: savedSearch || '',
+          };
+        } catch (e) {
+          console.error('Error loading from storage:', e);
+          return {
+            tasks: [...tasksData],
+            view: 'stage',
+            search: '',
+          };
+        }
+      }
+
+      // Save data to localStorage
+      function saveToStorage() {
+        try {
+          localStorage.setItem(STORAGE_KEYS.TASKS, JSON.stringify(tasks));
+          localStorage.setItem(STORAGE_KEYS.VIEW, currentView);
+          localStorage.setItem(STORAGE_KEYS.SEARCH, searchQuery);
+        } catch (e) {
+          console.error('Error saving to storage:', e);
+        }
+      }
+
+      // Initialize application state from storage
+      const savedData = loadFromStorage();
+      let tasks = savedData.tasks;
+      let currentView = savedData.view;
+      let searchQuery = savedData.search;
+
+      // Status cycle
+      const statusCycle = ['未開始', '進行中', '完成'];
+      const statusClasses = {
+        未開始: 'not-started',
+        進行中: 'in-progress',
+        完成: 'completed',
+      };
+
+      // Initialize app
+      function init() {
+        setupEventListeners();
+        restoreViewState();
+        updateStats();
+        renderTasks();
+      }
+
+      // Restore view state
+      function restoreViewState() {
+        // Restore active tab
+        document.querySelectorAll('.tab-button').forEach((button) => {
+          if (button.dataset.view === currentView) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+
+        // Restore search input
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+          searchInput.value = searchQuery;
+        }
+      }
+
+      // Setup event listeners
+      function setupEventListeners() {
+        // View tabs
+        document.querySelectorAll('.tab-button').forEach((button) => {
+          button.addEventListener('click', (e) => {
+            document.querySelectorAll('.tab-button').forEach((b) => b.classList.remove('active'));
+            e.target.classList.add('active');
+            currentView = e.target.dataset.view;
+            saveToStorage();
+            renderTasks();
+          });
+        });
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+          searchQuery = e.target.value.toLowerCase();
+          saveToStorage();
+          renderTasks();
+        });
+      }
+
+      // Toggle task status
+      function toggleTaskStatus(index) {
+        const task = tasks[index];
+        const currentStatusIndex = statusCycle.indexOf(task.status);
+        const nextStatusIndex = (currentStatusIndex + 1) % statusCycle.length;
+        task.status = statusCycle[nextStatusIndex];
+        saveToStorage();
+        updateStats();
+        renderTasks();
+      }
+
+      // Get task time status
+      function getTaskTimeStatus(taskTime) {
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentTimeInMinutes = currentHour * 60 + currentMinute;
+
+        const [taskHour, taskMinute] = taskTime.split(':').map(Number);
+        const taskTimeInMinutes = taskHour * 60 + taskMinute;
+
+        const diffInMinutes = taskTimeInMinutes - currentTimeInMinutes;
+
+        if (diffInMinutes < 0) {
+          return 'overdue';
+        } else if (diffInMinutes <= 30) {
+          return 'upcoming';
+        }
+        return 'normal';
+      }
+
+      // Filter tasks by search
+      function filterTasks() {
+        if (!searchQuery) return tasks;
+
+        return tasks.filter((task) => {
+          return (
+            task.description.toLowerCase().includes(searchQuery) ||
+            task.responsible.toLowerCase().includes(searchQuery) ||
+            task.stage.toLowerCase().includes(searchQuery)
+          );
+        });
+      }
+
+      // Update statistics
+      function updateStats() {
+        const completed = tasks.filter((t) => t.status === '完成').length;
+        const inProgress = tasks.filter((t) => t.status === '進行中').length;
+        const notStarted = tasks.filter((t) => t.status === '未開始').length;
+        const percentage = Math.round((completed / tasks.length) * 100);
+
+        document.getElementById('completedCount').textContent = completed;
+        document.getElementById('inProgressCount').textContent = inProgress;
+        document.getElementById('notStartedCount').textContent = notStarted;
+        document.getElementById('progressPercentage').textContent = percentage + '%';
+      }
+
+      // Render tasks
+      function renderTasks() {
+        const container = document.getElementById('tasksContainer');
+        const statsSection = document.getElementById('statsSection');
+        const filteredTasks = filterTasks();
+
+        if (currentView === 'stats') {
+          statsSection.style.display = 'grid';
+          container.innerHTML = '';
+          return;
+        } else {
+          statsSection.style.display = 'none';
+        }
+
+        if (filteredTasks.length === 0) {
+          container.innerHTML = '<div class="no-results">沒有找到符合的任務</div>';
+          return;
+        }
+
+        let groupedTasks = {};
+
+        if (currentView === 'timeline') {
+          // Group by time (chronological)
+          groupedTasks = { 所有任務: filteredTasks.sort((a, b) => a.time.localeCompare(b.time)) };
+        } else if (currentView === 'stage') {
+          // Group by stage
+          filteredTasks.forEach((task) => {
+            if (!groupedTasks[task.stage]) {
+              groupedTasks[task.stage] = [];
+            }
+            groupedTasks[task.stage].push(task);
+          });
+        } else if (currentView === 'responsible') {
+          // Group by responsible person
+          filteredTasks.forEach((task) => {
+            if (!groupedTasks[task.responsible]) {
+              groupedTasks[task.responsible] = [];
+            }
+            groupedTasks[task.responsible].push(task);
+          });
+        }
+
+        let html = '';
+
+        Object.keys(groupedTasks).forEach((groupName) => {
+          const groupTasks = groupedTasks[groupName];
+          html += `
+          <div class="group-section">
+            <div class="group-header">
+              <span>${groupName}</span>
+              <span class="group-count">${groupTasks.length} 個任務</span>
+            </div>
+        `;
+
+          groupTasks.forEach((task, idx) => {
+            const originalIndex = tasks.indexOf(task);
+            const timeStatus = getTaskTimeStatus(task.time);
+            const statusClass = statusClasses[task.status];
+            const timeClass = task.status !== '完成' ? timeStatus : '';
+
+            html += `
+            <div class="task-item ${statusClass} ${timeClass}" onclick="toggleTaskStatus(${originalIndex})">
+              <div class="task-time">${task.time}</div>
+              <div class="task-content">
+                <div class="task-description">${task.description}</div>
+                <div class="task-stage">${task.stage}</div>
+              </div>
+              <div class="task-responsible">${task.responsible}</div>
+              <div class="task-status ${statusClass}">${task.status}</div>
+            </div>
+          `;
+          });
+
+          html += '</div>';
+        });
+
+        container.innerHTML = html;
+      }
+
+      // Initialize the application
+      init();
+    </script>
+  </body>
+</html>
