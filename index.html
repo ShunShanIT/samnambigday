@@ -791,27 +791,23 @@
       // LocalStorage keys
       const STORAGE_KEYS = {
         TASKS: 'wedding_tasks',
-        VIEW: 'wedding_view',
-        SEARCH: 'wedding_search',
       };
 
       // Load data from localStorage
       function loadFromStorage() {
         try {
           const savedTasks = localStorage.getItem(STORAGE_KEYS.TASKS);
-          const savedView = localStorage.getItem(STORAGE_KEYS.VIEW);
-          const savedSearch = localStorage.getItem(STORAGE_KEYS.SEARCH);
 
           return {
             tasks: savedTasks ? JSON.parse(savedTasks) : [...tasksData],
-            view: savedView || 'stage',
-            search: savedSearch || '',
+            view: 'timeline',
+            search: '',
           };
         } catch (e) {
           console.error('Error loading from storage:', e);
           return {
             tasks: [...tasksData],
-            view: 'stage',
+            view: 'timeline',
             search: '',
           };
         }
@@ -821,8 +817,6 @@
       function saveToStorage() {
         try {
           localStorage.setItem(STORAGE_KEYS.TASKS, JSON.stringify(tasks));
-          localStorage.setItem(STORAGE_KEYS.VIEW, currentView);
-          localStorage.setItem(STORAGE_KEYS.SEARCH, searchQuery);
         } catch (e) {
           console.error('Error saving to storage:', e);
         }
